@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/hadikariarachch/Text-annonator-a#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "express": "^4.16.4",
     "jsdom": "^13.2.0",
     "mongoose": "^5.4.3"
