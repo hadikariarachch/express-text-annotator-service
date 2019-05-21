@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Homepage</title>
+    <!--CSS section-->
+    <link rel="stylesheet" href="css/home.css">
+
+    <!--JavaScript section-->
+    <script type="text/javascript" src="custom.js"></script>
+  </head>
+  <body>
+    <!--Header section-->
+    <div class="header">
+        <div class="headerName"><h1>Text Annotator</h1></div>        
+        <button class="loginButton" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    </div>
+
+    <!--Body section-->
+    <div class="wholeBody">
+        <div class="leftsideBody">
+
+            <div class="typeAreaDiv">
+                <label for="typeArea" class="labels">Enter your text</label>
+                <textarea type="text" class="textTypeArea" name="typeArea" id="typeArea"  placeholder="  Enter or paste text to be annotated"></textarea>
+            </div>
+
+            <div class="ontologiesDiv">
+                <label for="ontologies" class="labels">Select ontology</label>
+                <input class="selectOntologies" name="ontologies" id="ontologies" list="jsonOntologyList" autocomplete="on"  placeholder="Start typing to select an ontology or leave blank to use all"/>
+                <input type="hidden" id="selectedOntologyId" value=""/>
+                <datalist id="jsonOntologyList">
+                </datalist>
+            </div>
+
+            <div class="annotateButtonDiv">
+                    <input class="clickButton" id="annotatorButton" type="button" value="Get Annotations" onClick="generateResult()">
+            </div>
+
+        </div>
+
+        <div class="rightsideBody" >
+            <div resultsDiv style="overflow-y:scroll; height:450px; border-bottom: solid 1px #a8a8a8">
+                <table class="resultTable" id="annotationResult"></table>
+            </div>
+
+            <div class="saveSessionButtonDiv">
+                <input class="clickButton" id="saveSessionButton" type="button" value="Save Session" onClick="generateResult()" disabled>
+            </div>
+        </div>
+    </div>
+
+    <!--Login form model-->
+    <div id="id01" class="modal">
+  
+        <form class="modal-content animate" action="/action_page.php">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          </div>
+      
+          <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+      
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <div id="errorMessage">Username or password not match</div>
+              
+            <button type="submit">Login</button>
+          </div>
+      
+          <!-- <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+          </div> -->
+        </form>
+      </div>
+      
+      <!--Close the popup window when anywhere else clicked-->
+      <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            var ontologiesElement = document.getElementById('ontologies');
+            if(ontologiesElement){
+
+              var ontologyId = "";
+
+              ontologiesElement.addEventListener('input', function () {
+                var inputElementValue = document.getElementById("ontologies").value; //get the selected datalist item value
+                console.log("inputElementValue : "+ inputElementValue);
+              
+                if (document.getElementById("jsonOntologyList").options.namedItem(inputElementValue) != null) { 
+                  ontologyId = document.getElementById("jsonOntologyList").options.namedItem(inputElementValue).id; //get the _Id of selected item. We use the value to fild it's id
+                  document.getElementById("selectedOntologyId").value = ontologyId; //set the ontologyId to the hidden tag 
+                  console.log('ID changed to : ' + document.getElementById("selectedOntologyId").value);            
+                }                 
+              });
+              
+            }
+      </script>      
+  </body>
+</html>
