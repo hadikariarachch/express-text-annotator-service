@@ -13,7 +13,7 @@ function loadOntologies(){
     // Get the <datalist> elements.
     var options = ""; //create an empty string
     var request = new XMLHttpRequest(); //create a xmlhttp request
-    request.open('GET', 'http://localhost:3000/annotatorapp/getontologylist', true); //define as an ALAX request
+    request.open('GET', 'https://limitless-mountain-51335.herokuapp.com/annotatorapp/getontologylist', true); //define as an ALAX request
     request.onload = function () {
 
     // Begin accessing JSON data here
@@ -35,15 +35,6 @@ function loadOntologies(){
 
     request.send(); //send the ALAX request            
 };
-
-//creating a function to set the selected ontology ID to hidden tag
-// function setOntologyId(){
-//     console.log("Inside setOntologyId() function");
-    
-//     var inputElementValue = document.getElementById("ontologies").value; //get the selected datalist item value
-//     var ontologyId = document.getElementById("jsonOntologyList").options.namedItem(inputElementValue)._id; //get the _Id of selected item. We use the value to fild it's id
-//     document.getElementById("selectedOntologyId").value = ontologyId; //set the ontologyId to the hidden tag    
-// }
 
 // run loadOntologies function and populate datalist when the window loads
 window.onload = loadOntologies();   
@@ -67,7 +58,7 @@ function generateResult(){
     
         var request = new XMLHttpRequest(); //create a xmlhttp request
 
-        request.open('GET', 'http://localhost:3000/annotatorapp/getdefinition/:'+ annotateText +'/:'+jsonStringOfSelectedOntologies, true); //define as an ALAX request
+        request.open('GET', 'https://limitless-mountain-51335.herokuapp.com/annotatorapp/getdefinition/:'+ annotateText +'/:'+jsonStringOfSelectedOntologies, true); //define as an ALAX request
         request.onload = function () {
 
         // Begin accessing JSON data here
